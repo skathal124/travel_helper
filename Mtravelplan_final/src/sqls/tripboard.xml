@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="TripBoard"> 
+
+	<select id="getMyGroup" resultType="java.lang.Integer" 
+		parameterType="java.lang.String">
+			SELECT TGSEQ FROM TRIP_GROUP WHERE ID=#{id} AND GROUPIN=1
+	</select>
+
+	<select id="getMyGroupName" resultType="java.lang.String" 
+		parameterType="com.travel.plan.tripgroup.model.TripGroup">
+			SELECT TNAME FROM TRIP T WHERE T.TSEQ = (SELECT TSEQ FROM TRIP_GROUP WHERE TGSEQ=#{tgseq})
+	</select>
+	
+	<select id="getTseqFromTG" resultType="java.lang.Integer" 
+		parameterType="java.lang.Integer">
+			SELECT TSEQ FROM TRIP_GROUP WHERE TGSEQ=#{tgseq}
+	</select>
+
+<!-- photo -->	
+	
+	<update id="downloadCount" parameterType="java.lang.Integer">
+				UPDATE TRIP_ALBUM SET 
+				DOWNCOUNT=DOWNCOUNT+1
+				WHERE SEQ=#{seq}
+	</update>
+	
+	<delete id="deletePhotoBySeq" parameterType="java.lang.Integer">
+		DELETE FROM TRIP_ALBUM WHERE SEQ=#{seq}
+	</delete>
+	
+	<update id="updateGroupPhoto"
+			parameterType="com.travel.plan.tripboard.model.TripAlbum">
+			UPDATE TRIP_ALBUM SET TITLE=#{title},CONTENT=#{content},
+			FILENAME=#{filename} WHERE SEQ=#{seq}
+	</update>
+	
+	<select id="getFileName" resultType="java.lang.String" 
+		parameterType="java.lang.Integer">
+			SELECT FILENAME FROM TRIP_ALBUM WHERE SEQ=#{seq}
+	</select>
+	
+	<insert id="uploadGroupPhoto"  
+ 	parameterType="com.travel.plan.tripboard.model.TripAlbum"> 
+			INSERT INTO TRIP_ALBUM(SEQ,TSEQ,ID,TITLE,CONTENT,FILENAME,READCOUNT,DOWNCOUNT,REGDATE)
+			VALUES(SEQ_TRIP_ALBUM.NEXTVAL,#{tseq},#{id},#{title},#{content},#{filename},0,0,SYSDATE)
+ 	</insert>
+ 	
+ 	<select id="getPhotoByTseq" resultType="com.travel.plan.tripboard.model.TripAlbum" 
+		parameterType="java.lang.Integer">
+			SELECT * FROM TRIP_ALBUM WHERE TSEQ=#{tseq}
+	</select>
+	
+	<select id="getPhotoBySeq" resultType="com.travel.plan.tripboard.model.TripAlbum" 
+		parameterType="java.lang.Integer">
+			SELECT * FROM TRIP_ALBUM WHERE SEQ=#{seq}
+	</select>
+
+
+<!-- board -->
+	
+	<insert id="writeBoard"  
+	parameterType="com.travel.plan.tripboard.model.TripBoard">
+		INSERT INTO TRIP_BOARD(TBSEQ,TSEQ,REPLYCOUNT,ID ,TITLE,CONTENT,FILENAME,
+		WDATE,READCOUNT)
+		VALUES(TBSEQ_TRIP_BOARD.NEXTVAL,#{tseq},0,
+		#{id},#{title},#{content},#{filename},
+		SYSDATE,0)
+	</insert>
+	
+	
+	<select id="getBoardList"
+	parameterType="java.lang.Integer"
+	resultType="com.travel.plan.tripboard.model.TripBoard">
+		SELECT TBSEQ,TSEQ ,REPLYCOUNT,ID ,TITLE,CONTENT,FILENAME,
+		WDATE,READCOUNT
+		FROM TRIP_BOARD
+		WHERE TSEQ=#{tseq}
+	</select>
+	
+	
+	<select id="getBoard"
+	parameterType="java.lang.Integer"
+	resultType="com.travel.plan.tripboard.model.TripBoard">
+		SELECT TBSEQ,TSEQ ,REPLYCOUNT,ID ,TITLE,CONTENT,FILENAME,
+		WDATE,READCOUNT
+		FROM TRIP_BOARD
+		WHERE TBSEQ=#{tbseq}
+	</select>
+
+
+	<insert id="writeBoardReply"  
+	parameterType="com.travel.plan.tripboard.model.TripBoardReply">
+		INSERT INTO TRIP_BOARD_REPLY(TBRSEQ,ID,TBSEQ,CONTENT)
+		VALUES(TBRSEQ_TRIP_BOARD_REPLY.NEXTVAL,#{id},#{tbseq},#{content})
+	</insert>
+	
+
+
+	<update id="updateReplyCount"
+	parameterType="com.travel.plan.tripboard.model.TripBoard">
+		UPDATE TRIP_BOARD SET REPLYCOUNT=REPLYCOUNT+1 WHERE TBSEQ=#{tbseq}
+	</update>
+	
+	
+	<select id="getBoardReplyList"
+	parameterType="java.lang.Integer"
+	resultType="com.travel.plan.tripboard.model.TripBoardReply">
+		SELECT TBRSEQ,ID,TBSEQ,CONTENT
+		FROM TRIP_BOARD_REPLY
+		WHERE TBSEQ=#{tbseq}
+		ORDER BY TBRSEQ ASC
+	</select>
+	
+	
+	<update id="boardReadCount" parameterType="java.lang.Integer">
+		UPDATE TRIP_BOARD SET 
+		READCOUNT=READCOUNT+1
+		WHERE TBSEQ=#{tbseq}
+	</update>
+	
+	<delete id="deleteBoard" parameterType="java.lang.Integer">
+		DELETE FROM TRIP_BOARD WHERE TBSEQ=#{tbseq}
+	</delete>
+	
+	<delete id="deleteBoardReply" parameterType="java.lang.Integer">
+		DELETE FROM TRIP_BOARD_REPLY WHERE TBSEQ=#{tbseq}
+	</delete>
+
+	<update id="updateBoard" parameterType="com.travel.plan.tripboard.model.TripBoard">
+		UPDATE TRIP_BOARD SET 
+		TITLE=#{title},CONTENT=#{content},FILENAME=#{filename},WDATE=SYSDATE
+		WHERE TBSEQ=#{tbseq}
+	</update>
+	
+	
+	
+</mapper>

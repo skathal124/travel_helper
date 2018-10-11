@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="TripLike"> 
+
+
+	<select id="getlike"
+	parameterType="com.travel.plan.trip.model.Trip"
+	resultType="java.lang.Integer">
+		 		SELECT COUNT(*) 
+		 		FROM TRIP_LIKE 
+		 		WHERE TSEQ=#{tseq} AND ID=#{id}
+	</select>
+
+	<insert id="insertlikeOne" 
+	parameterType="com.travel.plan.trip.model.Trip">
+				INSERT INTO TRIP_LIKE (LSEQ, TSEQ, ID)
+				VALUES (SEQ_TRIP_LIKE.NEXTVAL,#{tseq} ,#{id})
+	</insert>
+	
+	<select id="getSelectLike"
+	parameterType="java.lang.Integer"
+	resultType="com.travel.plan.triplike.model.TripLike">
+		 		SELECT 
+				LSEQ, TSEQ, ID
+				FROM TRIP_LIKE
+				WHERE TSEQ=#{tseq}
+				ORDER BY TSEQ DESC
+	</select>
+	
+	<delete id="deletelikeOne"
+	parameterType="com.travel.plan.trip.model.Trip">
+	DELETE FROM TRIP_LIKE 
+	WHERE TSEQ=#{tseq} AND ID=#{id}
+	</delete>
+	
+	<delete id="deletelikeOneTseq"
+	parameterType="java.lang.Integer">
+	DELETE FROM TRIP_LIKE 
+	WHERE TSEQ=#{tseq}
+	</delete>
+	
+	
+</mapper>

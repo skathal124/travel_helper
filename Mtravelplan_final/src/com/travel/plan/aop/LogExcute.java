@@ -1,0 +1,38 @@
+package com.travel.plan.aop;
+import org.aspectj.lang.JoinPoint;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+// Android의 Async랑 같음.
+public class LogExcute  {
+	
+	public void before(JoinPoint j) // 실행할 지점 (joinpoint) 
+			throws Throwable {
+		Logger log = LoggerFactory.getLogger(j.getTarget()+"");
+		log.debug("시작");
+		
+		Object args[]=j.getArgs();
+		
+		if(args!=null){
+			log.debug("method:\t"+j.getSignature().getName());
+			for (int i = 0; i < args.length; i++) {
+				log.debug(i+"번째:\t"+args[i]);
+			}
+			log.debug("method:\t"+j.getSignature().getName());
+		}
+
+	}
+
+	// Method끝나면 자동 실행
+	public void afterReturning(JoinPoint j) throws Throwable {
+		Logger log = LoggerFactory.getLogger(j.getTarget()+"");
+		log.debug("끝");
+	}
+	
+	public void daoError(JoinPoint j){
+		Logger log = LoggerFactory.getLogger(j.getTarget()+""+j.getKind());
+		log.debug("에러"+j.getArgs( ));
+		log.debug("에러"+j.toString());
+	}
+
+}

@@ -1,0 +1,37 @@
+@CHARSET "UTF-8";
+
+   body {font-family:"돋움", dotum; font-size:0.75em; margin:0;}
+   
+   label { padding:0; margin:0; position:relative; top:1px; left:0px; }
+   input, select {  vertical-align:middle; font-size:1em; font-family:"돋움", dotum; }   
+   input { border:solid 1px white; padding:0.2em; }
+   input[type="checkbox"], input[type="radio"] { border:0; padding:0; margin:0; }
+   #body_wrap {width:100%;  padding:0px;}
+   #main_wrap {width:100%;  padding:0px; }
+   #top_wrap {width:80%; height:70px; margin-left:10%; border:solid 0px #FFE400; display: inline-block; border-bottom: solid 3px #FFA648;}
+   
+	#main_view {width: 80%; height: 100%; margin-top: 3%; margin-left: 10%;}
+	#left_view {width: 65%; height: 100%; display: inline-block; vertical-align: top;}
+	#right_view {width:31%; height: 100%;  display: inline-block; margin-top: 20px; margin-left: 3%;}
+	
+	#right_view img {width: 50px; height: 50px; vertical-align: middle;}
+	#right_view .title {font-size: 14px; font-weight: bolder;}
+
+	
+.ellipsis {
+
+	color: #4B4B4B;
+
+	display: -webkit-box;
+	
+	line-height: 1.6em;
+	height: 3.2em;
+	width: 100%;
+	font-size: 13px;
+	font-weight: bold;
+	margin-left: 2%;
+	margin-right: 2%;
+}
+	
+
+	

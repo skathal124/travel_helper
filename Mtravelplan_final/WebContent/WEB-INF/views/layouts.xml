@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+"http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+
+<definition name="login.tiles" template="/WEB-INF/views/login_tile.jsp">
+	<put-attribute name="login" value="/WEB-INF/views/logintile/login.jsp" />
+</definition>
+
+<definition name="regi.tiles" template="/WEB-INF/views/login_tile.jsp">
+	<put-attribute name="login" value="/WEB-INF/views/logintile/regi.jsp" />
+</definition>
+
+<definition name="firstmain.tiles" template="/WEB-INF/views/firstmain_tile.jsp">
+	<put-attribute name="top_inc" value="/WEB-INF/views/firstmaintile/top.jsp" />
+	<put-attribute name="pic" value="/WEB-INF/views/firstmaintile/pic.jsp" />
+	<put-attribute name="bot_menu" value="/WEB-INF/views/firstmaintile/bot_menu.jsp" />
+</definition>
+
+<definition name="trip.tiles" template="/WEB-INF/views/trip_tile.jsp">
+	<put-attribute name="top_inc" value="/WEB-INF/views/firstmaintile/top.jsp" />
+	<put-attribute name="main" value="/WEB-INF/views/triptile/main.jsp" />
+</definition>
+
+
+<definition name="newpage.tiles" template="/WEB-INF/views/np_tile.jsp">
+	<put-attribute name="np" value="/WEB-INF/views/triptile/tripadd.jsp" />
+</definition>
+	
+
+<definition name="calendar.tiles" template="/WEB-INF/views/main_tile2.jsp">
+	<put-attribute name="top_inc" value="/WEB-INF/views/firstmaintile/top.jsp" />
+<!-- 	<put-attribute name="top_menu" value="/WEB-INF/views/firstmaintile/menu.jsp" /> -->
+	<put-attribute name="view1" value="/WEB-INF/views/calendar/view1.jsp" />
+	<put-attribute name="view2" value="/WEB-INF/views/calendar/calendar.jsp" />
+</definition>
+
+<definition name="updatepage.tiles" template="/WEB-INF/views/up_tile.jsp">
+	<put-attribute name="np" value="/WEB-INF/views/triptile/tripupdate.jsp" />
+</definition>
+
+<definition name="groupplus.tiles" template="/WEB-INF/views/group_tile.jsp">
+</definition>
+
+
+<definition name="cityadd.tiles" template="/WEB-INF/views/triptile/cityadd.jsp">
+</definition>
+
+<definition name="cityedit.tiles" template="/WEB-INF/views/triptile/cityedit.jsp">
+</definition>
+
+
+<definition name="mpgroup.tiles" extends="mpinvite.tiles">
+	<put-attribute name="main_view" value="/WEB-INF/views/mypagetile/myGroup.jsp" />
+</definition>
+
+<definition name="mpbasket.tiles" extends="mpinvite.tiles">
+	<put-attribute name="left_menu" value="/WEB-INF/views/mypagetile/left_basket_view.jsp" />
+	<put-attribute name="main_view" value="/WEB-INF/views/mypagetile/myBasket.jsp" />
+</definition>
+
+
+<definition name="mpinvite.tiles" template="/WEB-INF/views/mypage_tile.jsp">
+	<put-attribute name="top_inc" value="/WEB-INF/views/firstmaintile/top.jsp" />
+	<put-attribute name="left_menu" value="/WEB-INF/views/mypagetile/left_view.jsp" />
+	<put-attribute name="main_view" value="/WEB-INF/views/mypagetile/inviteGroup.jsp" />
+</definition>
+
+<definition name="changeinfo.tiles" extends="mpinvite.tiles">
+	<put-attribute name="top_inc" value="/WEB-INF/views/firstmaintile/top.jsp" />
+<!-- 	<put-attribute name="top_menu" value="/WEB-INF/views/firstmaintile/menu.jsp" /> -->
+	<put-attribute name="left_menu" value="/WEB-INF/views/mypagetile/left_change_view.jsp" />
+	<put-attribute name="main_view" value="/WEB-INF/views/mypagetile/changeinfo.jsp" />
+</definition>
+
+<definition name="changeinfo_2.tiles" extends="changeinfo.tiles">
+	<put-attribute name="main_view" value="/WEB-INF/views/mypagetile/changeinfo_2.jsp" />
+</definition>
+
+<definition name="deleteinfo.tiles" extends="changeinfo.tiles">
+	<put-attribute name="main_view" value="/WEB-INF/views/mypagetile/deleteinfo.jsp" />
+</definition>
+
+<definition name="main_trip_start.tiles" template="/WEB-INF/views/mainplus_tile.jsp">
+	<put-attribute name="top_inc" value="/WEB-INF/views/firstmaintile/top.jsp" />
+<!-- 	<put-attribute name="top_menu" value="/WEB-INF/views/firstmaintile/menu.jsp" /> -->
+	<put-attribute name="left_view" value="/WEB-INF/views/mainplustile/tripstart_pic.jsp" />
+	<put-attribute name="right_view" value="/WEB-INF/views/mainplustile/tripstart_main.jsp" />
+</definition>
+
+<definition name="main_trip_share.tiles" extends="main_trip_start.tiles">
+	<put-attribute name="left_view" value="/WEB-INF/views/mainplustile/share_pic.jsp" />
+	<put-attribute name="right_view" value="/WEB-INF/views/mainplustile/shere_main.jsp" />
+</definition>
+
+<definition name="board.tiles" template="/WEB-INF/views/board_tile.jsp">
+	<put-attribute name="top_inc" value="/WEB-INF/views/firstmaintile/top.jsp" />
+	<put-attribute name="left_menu" value="/WEB-INF/views/boardtile/left_view.jsp" />
+	<put-attribute name="main_view" value="/WEB-INF/views/boardtile/board.jsp" />
+</definition>
+
+<definition name="trip_board_main.tiles" template="/WEB-INF/views/tripboard_tile.jsp">
+	<put-attribute name="top_inc" value="/WEB-INF/views/firstmaintile/top.jsp" />
+	<put-attribute name="tbmain_view" value="/WEB-INF/views/boardtile/tripBoardMain.jsp" />
+</definition>
+
+<definition name="board_write.tiles" extends="board.tiles">
+	<put-attribute name="main_view" value="/WEB-INF/views/boardtile/board_write.jsp" />
+</definition>
+
+<definition name="board_detail.tiles" extends="board.tiles">
+	<put-attribute name="main_view" value="/WEB-INF/views/boardtile/board_detail.jsp" />
+</definition>
+
+<definition name="board_reply.tiles" extends="board.tiles">
+	<put-attribute name="main_view" value="/WEB-INF/views/boardtile/board_reply.jsp" />
+</definition>
+
+<definition name="board_update.tiles" extends="board.tiles">
+	<put-attribute name="main_view" value="/WEB-INF/views/boardtile/board_update.jsp" />
+</definition>
+
+<definition name="trip_photo.tiles" extends="board.tiles">
+	<put-attribute name="main_view" value="/WEB-INF/views/boardtile/trip_photo.jsp" />
+</definition>
+
+<definition name="trip_photo_write.tiles" extends="board.tiles">
+	<put-attribute name="main_view" value="/WEB-INF/views/boardtile/trip_photo_write.jsp" />
+</definition>
+
+<definition name="updateGroupPhoto.tiles" extends="board.tiles">
+	<put-attribute name="main_view" value="/WEB-INF/views/boardtile/trip_photo_update.jsp" />
+</definition>
+
+
+
+<definition name="tripdetail.tiles" template="/WEB-INF/views/main_tile2.jsp">
+	<put-attribute name="top_inc" value="/WEB-INF/views/firstmaintile/top.jsp" />
+	<put-attribute name="tripcal" value="/WEB-INF/views/triptile/tripcalendar.jsp" />
+	<put-attribute name="view2" value="/WEB-INF/views/triptile/tripdailymain.jsp" />
+</definition>
+
+<definition name="tripdaily.tiles" extends="tripdetail.tiles">
+	<put-attribute name="view2" value="/WEB-INF/views/triptile/tripdaily.jsp" />
+</definition>
+
+<definition name="cityinfo.tiles" template="/WEB-INF/views/triptile/cityinfo.jsp">
+</definition>
+
+
+<definition name="sharetripboard.tiles" template="/WEB-INF/views/trip_tile.jsp">
+	<put-attribute name="top_inc" value="/WEB-INF/views/firstmaintile/top.jsp" />
+	<put-attribute name="main" value="/WEB-INF/views/planshare/sharetripboard.jsp" />
+</definition>
+
+
+<definition name="shareQnAboard.tiles" template="/WEB-INF/views/trip_tile.jsp">
+	<put-attribute name="top_inc" value="/WEB-INF/views/firstmaintile/top.jsp" />
+	<put-attribute name="main" value="/WEB-INF/views/planshare/shareQnAboard.jsp" />
+</definition>
+
+<definition name="picture.tiles" template="/WEB-INF/views/boardtile/aaaa.jsp">
+</definition>
+
+
+<definition name="vote.tiles" template="/WEB-INF/views/vote_tile.jsp">
+   <put-attribute name="top_inc" value="/WEB-INF/views/firstmaintile/top.jsp" />
+   <put-attribute name="left_menu" value="/WEB-INF/views/boardtile/left_view.jsp" />
+   <put-attribute name="main_view" value="/WEB-INF/views/boardtile/vote.jsp" />
+</definition>
+
+<definition name="vote.tiles2" template="/WEB-INF/views/vote_tile2.jsp">
+   <put-attribute name="top_inc" value="/WEB-INF/views/firstmaintile/top.jsp" />
+   <put-attribute name="left_menu" value="/WEB-INF/views/boardtile/left_view.jsp" />
+   <put-attribute name="main_left_view" value="/WEB-INF/views/boardtile/vote.jsp" />
+   <put-attribute name="main_right_view" value="/WEB-INF/views/boardtile/vote_end.jsp" />
+   <put-attribute name="main_bottom_view" value="/WEB-INF/views/boardtile/vote_bottom.jsp" />
+</definition>
+
+<definition name="endVote.tiles" extends="vote.tiles">
+   <put-attribute name="main_view" value="/WEB-INF/views/boardtile/vote_end.jsp" />
+</definition>
+
+
+<definition name="voteResult.tiles" extends="vote.tiles">
+   <put-attribute name="main_view" value="/WEB-INF/views/boardtile/vote_result.jsp" />
+</definition>
+
+<definition name="voteDeleteResult.tiles" extends="vote.tiles">
+   <put-attribute name="main_view" value="/WEB-INF/views/boardtile/vote_delete_result.jsp" />
+</definition>
+
+<definition name="voteWrite.tiles" extends="vote.tiles">
+   <put-attribute name="main_view" value="/WEB-INF/views/boardtile/vote_write.jsp" />
+</definition>
+
+<definition name="voteDetail.tiles" extends="vote.tiles">
+   <put-attribute name="main_view" value="/WEB-INF/views/boardtile/vote_detail.jsp" />
+</definition>
+
+<definition name="deleteVote.tiles" extends="vote.tiles">
+   <put-attribute name="main_view" value="/WEB-INF/views/boardtile/vote_delete.jsp" />
+</definition>
+
+<definition name="sharedetail.tiles" template="/WEB-INF/views/main_tile2.jsp">
+	<put-attribute name="top_inc" value="/WEB-INF/views/firstmaintile/top.jsp" />
+	<put-attribute name="tripcal" value="/WEB-INF/views/planshare/sharecalendar.jsp" />
+	<put-attribute name="view2" value="/WEB-INF/views/planshare/sharedailymain.jsp" />
+</definition>
+
+<definition name="dailyplan.tiles" extends="sharedetail.tiles">
+	<put-attribute name="view2" value="/WEB-INF/views/planshare/sharedaily.jsp" />
+</definition>
+
+
+<definition name="addplanbasket.tiles" template="/WEB-INF/views/planshare/basketadd.jsp">
+</definition>
+
+
+<definition name="mybasketlist.tiles" template="/WEB-INF/views/triptile/tripbasket.jsp">
+</definition>
+
+<definition name="memberdetail.tiles" template="/WEB-INF/views/mypagetile/memberdetail.jsp">
+</definition>
+
+</tiles-definitions> 

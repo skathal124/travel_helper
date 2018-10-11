@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="TripGroup"> 
+
+	<insert id="insertGroup" 
+	parameterType="com.travel.plan.trip.model.Trip">
+				INSERT INTO TRIP_GROUP 
+				(TGSEQ, TSEQ, ID, GROUPIN) 
+				VALUES (SEQ_TRIP_GROUP.NEXTVAL, #{tseq}, #{id}, 1)
+	</insert>
+	
+	
+	<select id="getTseqId"
+	parameterType="java.lang.String"
+	resultType="com.travel.plan.tripgroup.model.TripGroup">
+		SELECT TSEQ FROM TRIP_GROUP 
+		WHERE ID = #{id} AND GROUPIN = 1
+	</select>
+	
+	<delete id="delTripgroup"
+	parameterType="java.lang.Integer">
+		DELETE FROM TRIP_GROUP 
+		WHERE TSEQ=#{tseq}
+	</delete>
+	
+	
+	
+	<select id="getTripGroup" resultType="com.travel.plan.tripgroup.model.TripGroup" 
+	parameterType="java.lang.Integer">
+				SELECT TGSEQ,TSEQ,ID,GROUPIN
+				FROM TRIP_GROUP
+				WHERE TSEQ=#{tseq}
+	</select>
+	
+		<insert id="inviteMember" parameterType="com.travel.plan.tripgroup.model.TripGroup">
+		INSERT INTO TRIP_GROUP 
+				(TGSEQ, TSEQ, ID, GROUPIN) 
+				VALUES (SEQ_TRIP_GROUP.NEXTVAL, #{tseq}, #{id}, 0)
+	</insert>
+	
+	
+	<select id="commonIdCheck" resultType="java.lang.Integer" 
+	parameterType="com.travel.plan.tripgroup.model.TripGroup">
+				SELECT NVL(COUNT(*),0)
+     			FROM TRIP_GROUP WHERE TSEQ=#{tseq} and ID=#{id}
+	</select>
+	
+	<delete id="delTripgroupByTgseq"
+	parameterType="java.lang.Integer">
+		DELETE FROM TRIP_GROUP 
+		WHERE TGSEQ=#{tgseq}
+	</delete>
+	
+	
+</mapper>

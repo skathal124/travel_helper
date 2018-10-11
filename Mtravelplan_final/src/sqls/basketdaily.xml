@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="BasketDaily"> 
+
+	<insert id="insertBasketDaily" 
+	parameterType="com.travel.plan.basketdaily.model.BasketDaily">
+		INSERT INTO BASKET_DAILY
+		(BTDSEQ, TSEQ, TCSEQ, BTDDATE, BTDNUM, BTDPLACE, BTDSTIME, BTDETIME, BTDMONEY, BTDWORK, BTDLAT, BTDLNG, PLANSEQ) 
+		VALUES(SEQ_BASKET_DAILY.NEXTVAL,#{tseq},#{tcseq},#{btddate},#{btdnum},
+		#{btdplace},#{btdstime},#{btdetime},#{btdmoney},#{btdwork},#{btdlat},#{btdlng}, #{planseq})
+	</insert>
+	
+	<select id="getBasketDaily"
+	parameterType="java.lang.Integer"
+	resultType="com.travel.plan.basketdaily.model.BasketDaily">
+		 		SELECT 
+				BTDSEQ, TSEQ, TCSEQ, BTDDATE, BTDNUM, BTDPLACE, BTDSTIME, BTDETIME, BTDMONEY, BTDWORK, BTDLAT, BTDLNG, PLANSEQ 
+				FROM BASKET_DAILY
+				WHERE PLANSEQ=#{planseq}
+				ORDER BY PLANSEQ DESC
+	</select>
+	
+	<delete id="deleteBasketDaily"
+	parameterType="java.lang.Integer">
+		DELETE FROM BASKET_DAILY 
+		WHERE PLANSEQ=#{planseq}
+	</delete>
+	
+	
+</mapper>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="TripAlbum"> 
+
+	<update id="downloadCount" parameterType="java.lang.Integer">
+				UPDATE TRIP_ALBUM SET 
+				DOWNCOUNT=DOWNCOUNT+1
+				WHERE SEQ=#{seq}
+	</update>
+	
+	<delete id="deletePhotoBySeq" parameterType="java.lang.Integer">
+		DELETE FROM TRIP_ALBUM WHERE SEQ=#{seq}
+	</delete>
+	
+	<update id="updateGroupPhoto"
+			parameterType="com.travel.plan.tripboard.model.TripAlbum">
+			UPDATE TRIP_ALBUM SET TITLE=#{title},
+			FILENAME=#{filename} WHERE SEQ=#{seq}
+	</update>
+	
+	<select id="getFileName" resultType="java.lang.String" 
+		parameterType="java.lang.Integer">
+			SELECT FILENAME FROM TRIP_ALBUM WHERE SEQ=#{seq}
+	</select>
+	
+	<insert id="uploadGroupPhoto"  
+ 	parameterType="com.travel.plan.tripboard.model.TripAlbum"> 
+			INSERT INTO TRIP_ALBUM(SEQ,TSEQ,ID,TITLE,FILENAME,DOWNCOUNT,REGDATE)
+			VALUES(SEQ_TRIP_ALBUM.NEXTVAL,#{tseq},#{id},#{title},#{filename},0,SYSDATE)
+ 	</insert>
+ 	
+ 	<select id="getPhotoByTseq" resultType="com.travel.plan.tripboard.model.TripAlbum" 
+		parameterType="java.lang.Integer">
+			SELECT * FROM TRIP_ALBUM WHERE TSEQ=#{tseq}
+	</select>
+	
+	<select id="getPhotoBySeq" resultType="com.travel.plan.tripboard.model.TripAlbum" 
+		parameterType="java.lang.Integer">
+			SELECT * FROM TRIP_ALBUM WHERE SEQ=#{seq}
+	</select>
+	
+	
+</mapper>

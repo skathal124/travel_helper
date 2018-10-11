@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="TravelMember"> 
+
+	<insert id="addMember"  
+	parameterType="com.travel.plan.member.model.TravelMember">
+		INSERT INTO TRIP_MEMBER (ID,PWD,NAME,NICKNAME,EMAIL,AUTH)
+		VALUES(#{id},#{pwd},#{name},#{nickname},#{email},3)
+	</insert>
+	
+	<select id="checkMember"
+	parameterType="com.travel.plan.member.model.TravelMember"
+	resultType="com.travel.plan.member.model.TravelMember">
+		SELECT ID,PWD,NAME,NICKNAME,EMAIL,AUTH
+		FROM TRIP_MEMBER
+		WHERE ID=#{id} AND PWD=#{pwd}
+	</select>
+	
+	<select id="checkPwd"
+	parameterType="com.travel.plan.member.model.TravelMember"
+	resultType="com.travel.plan.member.model.TravelMember">
+		SELECT ID,PWD,NAME,NICKNAME,EMAIL,AUTH
+		FROM TRIP_MEMBER
+		WHERE ID=#{id} AND PWD=#{pwd}
+	</select>
+	
+	<select id="getID"
+	resultType="java.lang.Integer"
+	parameterType="com.travel.plan.member.model.TravelMember">
+		SELECT NVL(COUNT(*),0)
+		FROM TRIP_MEMBER WHERE ID=#{id}
+	</select>
+	
+	<select id="getNickname"
+	resultType="java.lang.Integer"
+	parameterType="com.travel.plan.member.model.TravelMember">
+		SELECT NVL(COUNT(*),0)
+		FROM TRIP_MEMBER WHERE NICKNAME=#{nickname}
+	</select>
+	
+	<select id="idorpass"
+   parameterType="com.travel.plan.member.model.TravelMember"
+   resultType="java.lang.Integer">
+      SELECT NVL(COUNT(*),0)
+      FROM TRIP_MEMBER WHERE ID=#{id} and PWD=#{pwd}
+   </select>
+   
+   <select id="getMember"
+	parameterType="com.travel.plan.member.model.TravelMember"
+	resultType="com.travel.plan.member.model.TravelMember">
+		SELECT ID,PWD,NAME,NICKNAME,EMAIL,AUTH
+		FROM TRIP_MEMBER
+		WHERE ID=#{id} 
+	</select>
+	
+ </mapper>

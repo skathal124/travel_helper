@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Trip"> 
+
+	<insert id="writeTrip" 
+	parameterType="com.travel.plan.trip.model.Trip">
+				INSERT INTO TRIP
+				(TSEQ,TNAME,SDATE,EDATE,ID,FILENAME) 
+				VALUES(SEQ_TRIP.NEXTVAL,
+				#{tname},#{sdate},#{edate},#{id},#{filename})
+	</insert>
+	
+	
+	<select id="getTripList"
+	parameterType="com.travel.plan.tripgroup.model.TripGroup"
+	resultType="com.travel.plan.trip.model.Trip">
+		 		SELECT 
+				TSEQ,TNAME,SDATE,EDATE,ID,FILENAME
+				FROM TRIP
+				WHERE TSEQ=#{tseq}
+				ORDER BY TSEQ DESC
+	</select>
+	
+	
+	<select id="getTrip" resultType="com.travel.plan.trip.model.Trip" 
+	parameterType="java.lang.Integer">
+				SELECT TSEQ,TNAME,SDATE,EDATE,ID,FILENAME
+				FROM TRIP
+				WHERE TSEQ=#{tseq}
+	</select>
+	
+	
+	<update id="updateTrip"
+	parameterType="com.travel.plan.trip.model.Trip">
+	UPDATE TRIP SET TNAME=#{tname},
+	SDATE=#{sdate}, EDATE=#{edate},
+	FILENAME=#{filename}
+	WHERE TSEQ=#{tseq}
+	</update>
+	
+	
+	<delete id="delTrip"
+	parameterType="java.lang.Integer">
+	DELETE FROM TRIP 
+	WHERE TSEQ=#{tseq}
+	</delete>
+	
+	<select id="getRecentTseq"
+	parameterType ="com.travel.plan.trip.model.Trip"
+	resultType="java.lang.Integer">
+		SELECT MAX(TSEQ) FROM TRIP
+		WHERE #{id} = (SELECT ID FROM TRIP
+						WHERE TSEQ=(SELECT MAX(TSEQ)FROM TRIP))
+	</select>
+	
+	
+	
+	<select id="getTripId" resultType="java.lang.Integer" 
+	parameterType="java.lang.String">
+				SELECT NVL(COUNT(*),0)
+     			FROM TRIP_MEMBER WHERE ID=#{id}
+	</select>
+	
+	<select id="getTripTotalCount"
+	parameterType="com.travel.plan.tripboard.help.TripParam"
+	resultType="java.lang.Integer">
+	SELECT NVL(count(*),0) AS cnt
+			  FROM   TRIP  WHERE 1 = 1 
+			  <if test="s_category != '' and s_category != null and s_keyword != '' and s_keyword != null">
+			<if test="s_category == 'title'"> AND ID like '%'||#{s_keyword}||'%'</if>	
+			<if test="s_category == 'contents'"> AND QUESTION like '%'||#{s_keyword}||'%'</if>	
+		</if>
+	</select>
+	
+	<select id="getTripPageList"
+	parameterType="com.travel.plan.tripboard.help.TripParam"
+	resultType="com.travel.plan.trip.model.Trip">
+	SELECT TSEQ,TNAME,SDATE,EDATE,ID,FILENAME
+	FROM 
+		( SELECT ROW_NUMBER() OVER (
+		ORDER BY  SDATE DESC) AS rnum,  
+		TSEQ,TNAME,SDATE,EDATE,ID,FILENAME
+	FROM TRIP_PAGING WHERE 1 = 1)
+	 A WHERE RNUM BETWEEN #{start} AND #{end}
+	</select>
+	
+	<insert id="InsertTripPaging" 
+	parameterType="com.travel.plan.trip.model.Trip">
+				INSERT INTO TRIP_PAGING
+				(TSEQ,TNAME,SDATE,EDATE,ID,FILENAME) 
+				VALUES(#{tseq},
+				#{tname},#{sdate},#{edate},#{id},#{filename})
+	</insert>
+	
+	<delete id="delTripPaging"
+	parameterType="java.lang.Integer">
+	DELETE FROM TRIP_PAGING
+	WHERE 1=1
+	</delete>
+	
+</mapper>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="TripVote"> 
+<select id="getPoll" 
+parameterType="com.travel.plan.tripboard.model.TripPoll"
+resultType="com.travel.plan.tripboard.model.TripPoll">
+SELECT * from trip_poll where tpseq=#{tpseq} 
+</select>
+<select id="getPollSubList" 
+parameterType="com.travel.plan.tripboard.model.TripPoll"
+resultType="com.travel.plan.tripboard.model.TripPollSub">
+SELECT POLLSUBSEQ, TPSEQ, ANSWER, ACOUNT
+FROM TRIP_POLLSUB 
+WHERE TPSEQ=#{tpseq}
+</select>
+
+<insert id="makePollSub"
+	parameterType="com.travel.plan.tripboard.model.TripPollSub">
+	INSERT INTO TRIP_POLLSUB 
+	(POLLSUBSEQ, TPSEQ, ANSWER, ACOUNT ) 
+	VALUES (POLLSUBSEQ_TRIP_POLLSUB.NEXTVAL, 
+	(SELECT NVL(MAX(TPSEQ),0) FROM TRIP_POLL)
+	, #{answer}, 0)
+</insert>	
+
+	<insert id="makePoll"
+	parameterType="com.travel.plan.tripboard.model.TripPoll">
+	INSERT INTO TRIP_POLL 
+	(TPSEQ,TSEQ,ID,QUESTION,SDATE,EDATE,ITEMCOUNT,POLLTOTAL,REGDATE) 
+	VALUES (TPSEQ_TRIP_POLL.NEXTVAL,#{tseq},
+	#{id},#{question}, #{sdate},#{edate}, #{itemcount},
+	0, SYSDATE) 
+	</insert>
+
+	<select id="getPollAllList" 
+	parameterType = "java.lang.Integer"
+	resultType="com.travel.plan.tripboard.model.TripPoll">
+	SELECT TPSEQ,TSEQ,ID,QUESTION,SDATE,EDATE,
+	ITEMCOUNT,POLLTOTAL,REGDATE
+	FROM TRIP_POLL WHERE TSEQ=#{tseq}
+	ORDER BY SDATE DESC 
+	</select>
+
+ 	<select id="isVote" 
+ 	parameterType="com.travel.plan.tripboard.model.TripPoll" 
+ 	resultType="java.lang.Integer">
+ 	SELECT COUNT(*)
+ 	FROM TRIP_VOTER 
+ 	WHERE TPSEQ=#{tpseq} AND ID=#{id} 
+	</select>		
+
+	<insert id="pollingVote" 
+	parameterType="com.travel.plan.tripboard.model.TripVoter">
+	INSERT INTO TRIP_VOTER(VOTERSEQ,TPSEQ, POLLSUBSEQ, ID,REGDATE) 
+	VALUES(SEQ_TRIP_VOTER.NEXTVAL,
+	#{tpseq}, #{pollsubseq},#{id}, SYSDATE) 
+	</insert>
+	
+	<update id="pollingSub" 
+	parameterType="com.travel.plan.tripboard.model.TripVoter">
+	UPDATE TRIP_POLLSUB SET ACOUNT = ACOUNT+1
+	WHERE TPSEQ=#{tpseq} AND POLLSUBSEQ=#{pollsubseq}
+	</update>
+	
+	<update id="pollingPoll" 
+	parameterType="com.travel.plan.tripboard.model.TripVoter">
+	UPDATE TRIP_POLL SET POLLTOTAL = POLLTOTAL + 1
+	WHERE TPSEQ=#{tpseq} 
+	</update>
+
+	<select id="getMyPollList" 
+ 	parameterType="com.travel.plan.tripboard.model.TripPoll" 
+ 	resultType="com.travel.plan.tripboard.model.TripPoll">
+ 	SELECT TPSEQ,TSEQ,ID,QUESTION,SDATE,EDATE,
+	ITEMCOUNT,POLLTOTAL,REGDATE
+	FROM TRIP_POLL WHERE ID=#{id} AND TSEQ=#{tseq}
+	ORDER BY SDATE DESC 
+	</select>	
+	
+	<delete id="deleteTrip_Voter"
+	parameterType="java.lang.Integer">
+		DELETE TRIP_VOTER WHERE TPSEQ=#{tpseq} 
+	</delete>
+	
+	<delete id="deleteTrip_PollSub"
+	parameterType="java.lang.Integer">
+		DELETE TRIP_POLLSUB WHERE TPSEQ=#{tpseq} 
+	</delete>
+	
+	<delete id="deleteTrip_Poll"
+	parameterType="java.lang.Integer">
+		DELETE TRIP_POLL WHERE TPSEQ=#{tpseq} 
+	</delete>
+<!-- 	SELECT SEQ_HKM_POLL.CURRVAL  FROM HKM_POLL-->
+
+
+<!-- WHERE TO_DATE(EDATE,'YYYY-MM-DD') >= TO_DATE(SYSDATE,'YYYY-MM-DD') -->
+	
+
+
+
+	
+ </mapper>

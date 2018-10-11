@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="TripDaily"> 
+
+	<insert id="insertTripDaily" 
+	parameterType="com.travel.plan.tripdaily.model.TripDaily">
+		INSERT INTO TRIP_DAILY
+		(TDSEQ, TSEQ, TCSEQ, TDDATE, TDNUM, TDPLACE, TDSTIME, TDETIME, TDMONEY, TDWORK, TDLAT, TDLNG) 
+		VALUES(SEQ_TRIP_DAILY.NEXTVAL,#{tseq},#{tcseq},#{tddate},#{tdnum},
+		#{tdplace},#{tdstime},#{tdetime},#{tdmoney},#{tdwork},#{tdlat},#{tdlng})	
+	</insert>
+	
+	
+	<delete id="deleteTripDaily"
+	parameterType="com.travel.plan.tripdaily.model.TripDaily">
+		DELETE TRIP_DAILY 
+		WHERE TDDATE = #{tddate} AND TSEQ=#{tseq} AND TCSEQ=#{tcseq}
+	</delete>
+	
+	
+	<select id="getTripDailyList"
+	parameterType="com.travel.plan.tripdaily.model.TripDaily"
+	resultType="com.travel.plan.tripdaily.model.TripDaily">
+		 SELECT * FROM TRIP_DAILY 
+		 WHERE TDDATE=#{tddate} AND TSEQ=#{tseq} AND TCSEQ=#{tcseq}
+		 ORDER BY TDNUM
+	</select>
+	
+	
+	<delete id="deleteDailyList"
+	parameterType="java.lang.Integer">
+		DELETE TRIP_DAILY WHERE TSEQ=#{tseq}
+	</delete>
+	
+	<select id="getCityInfo"
+	parameterType="java.lang.Integer"
+	resultType="com.travel.plan.tripdaily.model.TripDaily">
+		 SELECT * FROM TRIP_DAILY 
+		 WHERE TCSEQ=#{tcseq}
+		 ORDER BY TDDATE, TDNUM
+	</select>
+	
+	<delete id="deleteTripDailyList"
+	parameterType="java.lang.Integer">
+		DELETE TRIP_DAILY WHERE TCSEQ=#{tcseq}
+	</delete>
+	
+</mapper>

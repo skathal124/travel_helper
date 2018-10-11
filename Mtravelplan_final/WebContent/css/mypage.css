@@ -1,0 +1,81 @@
+@CHARSET "UTF-8";
+
+   body {font-family:"돋움", dotum; font-size:0.75em; margin:0;}
+   
+   label { padding:0; margin:0; position:relative; top:1px; left:0px; }
+   input, select {  vertical-align:middle; font-size:1em; font-family:"돋움", dotum; }   
+   input { border:solid 1px white; padding:0.2em; }
+   input[type="checkbox"], input[type="radio"] { border:0; padding:0; margin:0; }
+   #body_wrap {width:100%;  padding:0px;}
+   #main_wrap {width:100%;  padding:0px; }
+   #top_wrap {width:80%; height:72px; margin-left:10%; border:solid 0px #FFE400; display: inline-block; border-bottom: solid 3px #FFA648;}
+   
+	#hap_wrap {width: 80%; height: 100%; margin-left: 10%;}
+	#left_view {float:left; width:14%; margin:0px; padding:0px; display: inline-block;}
+	#main_view {width: 86%; display: inline-block; }
+	
+/* 	#main_view input[type="button"] {margin-top: 3px;  border-radius: 3px; width: 50px; height:26px;  */
+/* 	background-color: #FFEE90; color: #474747; font-weight: bolder; border: solid 1px #FF9436;} */
+	
+/* 	#myinfo{width: 80%; height: 100%; margin-left: 10%;} */
+/* 	#stitle{font-size: 13px; font-weight: bold;} */
+
+	#myinfo_main{width: 85%; height: 100%;}
+	#myinfo_top{width: 100%; }
+	#myinfo_left {width: 40%; display: inline-block; margin-left: 6%;}
+	#myinfo_right{width: 42%; display: inline-block; margin-left: 3%; vertical-align: top;}
+	#stitle{font-size: 14px; font-weight: bold;}
+	#myinfo_main input[type="text"] {margin-top: 3px; border: solid 1.5px #DB3A00; border-radius: 4px; width: 35%; height: 18px;}
+	#myinfo_main input[type="password"] {margin-top: 3px; border: solid 1.5px #DB3A00; border-radius: 4px; width: 34%; height: 18px;}
+	#myinfo_main input[type="button"] {margin-top: 3px;  border-radius: 3px; width: 72px; height:26px; 
+	background-color: #FF7012; color: white; font-weight: bolder;}	
+	
+	#myinfo_out {width: 30%; margin-left:37%;}
+	#myinfo_out input[type="text"] {margin-top: 3px; border: solid 1.5px #DB3A00; border-radius: 4px; width: 50%; height: 18px;}
+	#myinfo_out input[type="password"] {margin-top: 3px; border: solid 1.5px #DB3A00; border-radius: 4px; width: 50%; height: 18px; }
+	
+	#_btnDelete input[type="button"] {margin-top: 3px;  border-radius: 3px; width: 80px; height:26px; 
+	background-color: #FF7012; color: white; font-weight: bolder; }	
+	
+	
+	.menu_table { width:90%; padding:0; margin:0; color:#FFFFFF; text-align:left; }
+	.menu_table ul { list-style:none;     -webkit-padding-start: 0px;}	
+	.menu_table li { margin-bottom: 2px; height: 26px; background-color: #FFFFA2;}
+	.menu_table li.title {  font-weight:bold; text-align:center; background-color:#EFEFEF; color:#000000; border:1px solid #f1eff0;  font-size: 15px;}
+	.menu_table li.subtitle { border:solid 1px #919191; background-color:#FF5E00; padding-top:0.2em; line-height: 1.8em; text-align:left; font-weight: bolder; font-size: 13px;}
+	.menu_table li.menu_item { line-height: 1.8em; }
+	.menu_table li.menu_item a { display:block; border:solid 1px #FF8224;  padding-left: 15px; padding-top:0.2em; text-decoration:none; color:#000000;}
+	.menu_table li.menu_item a:hover { background-image:url("../image/arrow.gif"); background-repeat:no-repeat; background-position:5px 7px; background-color:#FFFFFF; }
+	
+
+
+
+	.list_table td,.list_table th { text-align:center; border:0px solid #EFEFEF;  padding:0.3em; }
+	.list_table th { background-color:#FF5E00; color:#FFFFFF; line-height:1.7em; font-weight:bolder; font-size: 14px; }
+	.list_table tr td { padding-top:0.5em; padding-bottom:0.5em; border-bottom: solid 1px #BDBDBD; font-size: 13px;}	
+	.list_table td.title { padding-left:0.5em; text-align:left; }
+	.list_table td.title a:hover { text-decoration:underline; }
+	.list_table th, .list_table td { vertical-align:middle; }	
+
+	.list_table select { height:19px; border:#CCCCCC solid 1px; vertical-align:middle; line-height: 1.8em; padding-left:0px; }
+	.list_table select option { margin-right:10px; }
+	.list_table .selected_row { border:solid 0px #EFEFEF; }
+	.list_table .sele { padding:0; margin:0; }
+
+.ellipsis {
+	overflow: hidden;
+	color: #4B4B4B;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 2; /* 라인수 */
+	-webkit-box-orient: vertical;
+	word-wrap: break-word;
+	line-height: 1.6em;
+	height: 3.2em;
+	width: 100%;
+	font-size: 13px;
+	font-weight: bold;
+}
+	
+
+	

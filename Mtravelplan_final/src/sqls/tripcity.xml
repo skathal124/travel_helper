@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="TripCity"> 
+
+	<insert id="insertCity" 
+	parameterType="com.travel.plan.tripcity.model.TripCity">
+				INSERT INTO TRIP_CITY
+				(TCSEQ , TSEQ, CITYNAME, CITYSDATE, CITYEDATE, CITYLAT, CITYLNG)
+				VALUES (SEQ_TRIP_CITY.NEXTVAL, #{tseq}, #{cityname}, #{citysdate}, #{cityedate}, 
+						#{citylat}, #{citylng})
+	</insert>
+	
+	<select id="getCityList"
+	parameterType="java.lang.Integer"
+	resultType="com.travel.plan.tripcity.model.TripCity">
+		SELECT TCSEQ , TSEQ, CITYNAME, CITYSDATE, CITYEDATE, CITYLAT, CITYLNG
+		FROM TRIP_CITY WHERE TSEQ=#{tseq}
+	</select>
+	
+	
+	<select id="getTripCity"
+	parameterType="java.lang.Integer"
+	resultType="com.travel.plan.tripcity.model.TripCity">
+		SELECT TCSEQ , TSEQ, CITYNAME, CITYSDATE, CITYEDATE, CITYLAT, CITYLNG
+		FROM TRIP_CITY WHERE TCSEQ=#{tcseq}
+	</select>
+	
+	
+	<update id="updateTripCity"
+	parameterType="com.travel.plan.tripcity.model.TripCity">
+	UPDATE TRIP_CITY SET
+		CITYNAME=#{cityname},
+		CITYSDATE=#{citysdate},
+		CITYEDATE=#{cityedate},
+		CITYLAT=#{citylat},
+		CITYLNG=#{citylng}
+	WHERE TCSEQ=#{tcseq}
+	</update>
+	
+	<delete id="deleteTripCity"
+	parameterType="java.lang.Integer">
+		DELETE FROM TRIP_CITY 
+		WHERE TCSEQ=#{tcseq}
+	</delete>
+	
+	<delete id="deleteCityList"
+	parameterType="java.lang.Integer">
+		DELETE FROM TRIP_CITY 
+		WHERE TSEQ=#{tseq}
+	</delete>
+	
+</mapper>

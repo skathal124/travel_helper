@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="MyPage"> 
+
+	<select id="showlist" resultType="java.lang.String" 
+		parameterType="java.lang.String">
+			SELECT TNAME FROM TRIP T INNER JOIN TRIP_GROUP TG ON  
+       		TG.GROUPIN=0 AND T.TSEQ = TG.TSEQ AND
+       		TG.ID=#{id}
+	</select>
+	
+	
+	<select id="inmytrip" resultType="java.lang.Integer" 
+		parameterType="java.lang.String">
+			SELECT TSEQ FROM TRIP_GROUP WHERE ID=#{id} AND GROUPIN=1
+	</select>
+	
+	
+	<select id="inmytripname" resultType="java.lang.String" 
+		parameterType="java.lang.Integer">
+			SELECT TNAME FROM TRIP WHERE TSEQ=#{tseq}
+	</select>
+	
+	
+	
+	<select id="getTseqFromId" resultType="java.lang.Integer" 
+	parameterType="com.travel.plan.tripgroup.model.TripGroup">
+				SELECT TSEQ FROM TRIP_GROUP
+				WHERE ID=#{id} AND GROUPIN=0
+	</select>
+	
+	<update id="changeMyInfo"
+			parameterType="com.travel.plan.member.model.TravelMember">
+			UPDATE TRIP_MEMBER SET NICKNAME=#{nickname},
+			PWD=#{pwd},EMAIL=#{email} WHERE ID=#{id}
+	</update>
+	
+	<update id="changeGroupIn"
+			parameterType="com.travel.plan.trip.model.Trip">
+			UPDATE TRIP_GROUP SET GROUPIN = 1
+			WHERE TSEQ=#{tseq} AND ID=#{id}
+	</update>
+	
+	<select id="getPersonId"
+			resultType="java.lang.String"
+			parameterType="java.lang.Integer">
+		select id from trip where tseq=#{tseq}
+	</select>
+	
+	<select id="getTgseqFromTg"
+			resultType="java.lang.Integer"
+			parameterType="com.travel.plan.tripgroup.model.TripGroup">
+		SELECT TGSEQ FROM TRIP_GROUP WHERE TSEQ=#{tseq} AND ID=#{id}
+	</select>
+	
+	<select id="checkMypagePwd"
+	parameterType="com.travel.plan.member.model.TravelMember"
+	resultType="java.lang.Integer">
+		select count(*) from TRIP_MEMBER where 
+		id =#{id} and pwd=#{pwd}
+	</select>
+	
+	<delete id="deleteMemberById"
+	parameterType="com.travel.plan.member.model.TravelMember">
+		DELETE FROM TRIP_MEMBER WHERE ID=#{id}
+	</delete>
+	
+	<delete id="deleteTripById"
+	parameterType="com.travel.plan.member.model.TravelMember">
+		DELETE FROM TRIP WHERE ID=#{id}
+	</delete>
+	
+	<delete id="deleteTripGroupById"
+	parameterType="com.travel.plan.member.model.TravelMember">
+		DELETE FROM TRIP_GROUP WHERE ID=#{id}
+	</delete>
+	
+	<delete id="deleteTripBoardReplyById"
+	parameterType="com.travel.plan.member.model.TravelMember">
+		DELETE FROM TRIP_BOARD_REPLY WHERE ID=#{id}
+	</delete>
+	
+	<delete id="deleteTripBoardById"
+	parameterType="com.travel.plan.member.model.TravelMember">
+		DELETE FROM TRIP_BOARD WHERE ID=#{id}
+	</delete>
+	
+	
+</mapper>

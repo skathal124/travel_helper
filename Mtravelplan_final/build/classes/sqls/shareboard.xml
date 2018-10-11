@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ShareBoard"> 
+
+	<insert id="insertShareBoard" 
+	parameterType="com.travel.plan.shareboard.model.ShareBoard">
+		INSERT INTO SHARE_BOARD (SBSEQ, ID, TSEQ, SBNAME, SBCITY, TOTALLIKE) 
+		VALUES (SEQ_SHARE_BOARD.NEXTVAL, #{id}, #{tseq}, #{sbname}, #{sbcity}, 0)
+	</insert>
+	
+	<select id="getShareBoardList"
+	resultType="com.travel.plan.shareboard.model.ShareBoard">
+		 		SELECT SBSEQ, ID, TSEQ, SBNAME, SBCITY, TOTALLIKE
+				FROM SHARE_BOARD
+				ORDER BY SBSEQ DESC
+	</select>
+	
+	
+	<select id="checkshare"
+	parameterType="java.lang.Integer"
+	resultType="java.lang.Integer" >
+		SELECT COUNT(*) FROM SHARE_BOARD WHERE TSEQ=#{tseq}
+	</select>
+	
+	
+	<update id="updatetotallike"
+	parameterType="java.lang.Integer">
+		UPDATE SHARE_BOARD 
+		SET TOTALLIKE = (SELECT COUNT(*) 
+						FROM TRIP_LIKE 
+						WHERE TSEQ =#{tseq}) 
+		WHERE TSEQ=#{tseq}
+	</update>
+	
+	<delete id="deleteshareboard"
+	parameterType="java.lang.Integer">
+		DELETE FROM SHARE_BOARD  
+		WHERE SBSEQ=#{sbseq}
+	</delete>
+	
+	
+	<delete id="deleteshareboardtseq"
+	parameterType="java.lang.Integer">
+		DELETE FROM SHARE_BOARD  
+		WHERE TSEQ=#{tseq}
+	</delete>
+	
+
+	
+</mapper>

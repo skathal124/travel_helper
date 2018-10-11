@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="PlanBasket"> 
+
+	<insert id="insertbasket" 
+	parameterType="com.travel.plan.planbasket.model.PlanBasket">
+				INSERT INTO PLAN_BASKET
+				(PLANSEQ,BASKETNAME,SOMEDAY,ID) 
+				VALUES(SEQ_PLAN_BASKET.NEXTVAL,
+				#{basketname},#{someday},#{id})
+	</insert>
+	
+	
+	<select id="getPlanBasket"
+	parameterType="java.lang.String"
+	resultType="com.travel.plan.planbasket.model.PlanBasket">
+		 		SELECT 
+				PLANSEQ,BASKETNAME,SOMEDAY,ID
+				FROM PLAN_BASKET
+				WHERE ID=#{id}
+				ORDER BY PLANSEQ DESC
+	</select>
+	
+	
+	<select id="getrecentPlanseq"
+	parameterType="java.lang.String"
+	resultType="java.lang.Integer">
+		 	SELECT MAX(PLANSEQ) FROM PLAN_BASKET
+			WHERE #{id} = (SELECT ID FROM PLAN_BASKET
+							WHERE PLANSEQ=(SELECT MAX(PLANSEQ)FROM PLAN_BASKET))
+	</select>
+	
+	
+	<delete id="deletePlanBasket"
+	parameterType="java.lang.Integer">
+		DELETE FROM PLAN_BASKET 
+		WHERE PLANSEQ=#{planseq}
+	</delete>
+	
+	
+</mapper>
